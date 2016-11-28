@@ -1,0 +1,62 @@
+public class HeapAttempt {
+	
+	public static void main(String args[]){
+		int []arr = new int[50];
+		System.out.print("The unsorted array is: ");
+		for (int i = 0 ; i < arr.length; i++){
+			arr[i] = (int)(Math.random() * 100);
+			System.out.print(arr[i] + " ");
+		}
+		
+		HeapAttempt a = new HeapAttempt();
+		a.sortHeap(arr);
+		System.out.print("\nThe sorted array is: ");
+		quickSort(arr);
+		
+	}
+	
+	void heap(int arr[], int a, int b){
+		int biggest = b;
+		int left = 2*b + 1;
+		int right = 2*b +2;
+		
+		if(left < a && arr[left] > arr[biggest]){
+			biggest = 1;
+		}
+		
+		if(right < b && arr[right] > arr[biggest]){
+			biggest = right;
+		}
+		
+		if (biggest != b){
+			int temp = arr[b];
+			arr[b] = arr[biggest];
+			arr[biggest] = temp;
+			heap(arr , a, biggest);
+		}	
+	}
+	
+	
+	public void sortHeap(int arr[]){
+		int a = arr.length;
+		
+		for(int i = a/2 - 1; i >= 0; i--){
+			heap(arr, a, i);
+			
+			for (int j = a-1; j >= 0; j--){
+				int temp = arr[0];
+				arr[0] = arr[j];
+				arr[j] = temp;
+				
+				heap(arr, j, 0);
+			}
+		}	
+	}	
+	
+	static void quickSort(int arr[]){
+		int a = arr.length;
+		for(int i = 0; i < a; i++){
+			System.out.print(arr[i]+ " ");
+		}
+	}
+}
