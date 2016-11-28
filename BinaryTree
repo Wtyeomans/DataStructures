@@ -1,0 +1,86 @@
+public class BinaryTree {
+int root;
+BinaryTree leftnode;
+BinaryTree rightnode;
+
+
+public static void main(String[] args){
+	//creating a filling array
+	int[] arr = new int[50];
+	System.out.println("Original Array:");
+	for(int i = 0;i<50;i++){
+		arr[i] = (int)(Math.random()*100);
+		System.out.print(arr[i]+" ");
+
+
+	}
+	System.out.println();
+	
+	
+	//creating and filling tree
+	BinaryTree tree = new BinaryTree(arr[0]);
+	for(int k = 1;k<50;k++){
+		tree.addNode(arr[k]);
+	}
+	
+	//inorder traversal
+	System.out.println("inorder traversal: ");
+	tree.inOrder();
+	
+}
+
+
+
+
+
+
+public BinaryTree(int num){
+	this.root = num;
+	this.leftnode = null;
+	this.rightnode = null;
+}
+
+
+
+
+public void addNode(int x){
+	if(x<this.root){
+		if(this.leftnode !=null){
+			this.leftnode.addNode(x);
+		}
+		else{
+			this.leftnode = new BinaryTree(x);
+		}
+	}
+	else{
+		if(this.rightnode!=null){
+			this.rightnode.addNode(x);
+		}
+		else{
+			this.rightnode= new BinaryTree(x);
+		}
+		
+	}
+	
+}
+
+
+//
+public void inOrder(){
+	
+	if(this.leftnode != null){
+		this.leftnode.inOrder();
+	}
+	System.out.print(this.root + " ");
+	if(this.rightnode!=null){
+		this.rightnode.inOrder();
+	}
+	
+}
+
+
+}
+
+
+
+
