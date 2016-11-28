@@ -1,3 +1,5 @@
+//currently only prints lowest number in array first, the rest remains unsorted
+
 public class HeapAttempt {
 	
 	public static void main(String args[]){
