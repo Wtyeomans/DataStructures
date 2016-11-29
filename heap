@@ -1,64 +1,64 @@
-//currently only prints lowest number in array first, the rest remains unsorted
-
-public class HeapAttempt {
-	
+public class ProjectHeap{
+	/* Main method creates array of random integers then creates a new object.
+	 * The sortHeap method is then used on the object and sorted array is printed out. 
+	 */
 	public static void main(String args[]){
-		int []arr = new int[50];
-		System.out.print("The unsorted array is: ");
-		for (int i = 0 ; i < arr.length; i++){
-			arr[i] = (int)(Math.random() * 100);
-			System.out.print(arr[i] + " ");
+        int[] array = new int[30];
+        System.out.println("Unsorted array is");
+        for (int i = 0 ; i < array.length; i++){
+			array[i] = (int)(Math.random() * 100);
+			System.out.print(array[i] + " ");
 		}
-		
-		HeapAttempt a = new HeapAttempt();
-		a.sortHeap(arr);
-		System.out.print("\nThe sorted array is: ");
-		quickSort(arr);
-		
-	}
-	
-	void heap(int arr[], int a, int b){
-		int biggest = b;
-		int left = 2*b + 1;
-		int right = 2*b +2;
-		
-		if(left < a && arr[left] > arr[biggest]){
-			biggest = 1;
-		}
-		
-		if(right < b && arr[right] > arr[biggest]){
-			biggest = right;
-		}
-		
-		if (biggest != b){
-			int temp = arr[b];
-			arr[b] = arr[biggest];
-			arr[biggest] = temp;
-			heap(arr , a, biggest);
-		}	
-	}
-	
-	
-	public void sortHeap(int arr[]){
-		int a = arr.length;
-		
-		for(int i = a/2 - 1; i >= 0; i--){
-			heap(arr, a, i);
-			
-			for (int j = a-1; j >= 0; j--){
-				int temp = arr[0];
-				arr[0] = arr[j];
-				arr[j] = temp;
-				
-				heap(arr, j, 0);
-			}
-		}	
-	}	
-	
-	static void quickSort(int arr[]){
-		int a = arr.length;
-		for(int i = 0; i < a; i++){
-			System.out.print(arr[i]+ " ");
-		}
-	}
+        ProjectHeap heap = new ProjectHeap();
+        heap.sortHeap(array);
+        System.out.println("\nSorted array is");
+        for (int i=0; i < array.length; i++){
+            System.out.print(array[i]+" ");
+        }
+    }
+	/* Builds heap and sorts it via extracting elements one at time 
+	 * from the heap and the heapify method is called on the heap.
+	 * A basic swap algorithm is then used to move the current
+	 * root to the end of the heap.
+	 * Finally the heapify method is called again after each iteration of the loop.
+	 */
+    public void sortHeap(int array[]){
+        int a = array.length;
+        for (int i = a/2-1; i >= 0; i--){
+            heapify(array, a, i);
+        }
+        for (int j = a-1; j > 0; j--)
+        {
+            int temp = array[0];
+            array[0] = array[j];
+            array[j] = temp;
+            heapify(array, j, 0);
+        }
+    }
+    /* Heapify initializes a root b and begins sorting based off reassigning b.
+     * 
+     */
+    void heapify(int array[], int a, int b){
+        int largest = b;  // Initialize largest as root
+        int left = 2*b + 1;  // left = 2*i + 1
+        int right = 2*b + 2;  // right = 2*i + 2
+ 
+        // If left child is larger then the root
+        if (left < a && array[left] > array[largest]){
+            largest = left;
+        }
+        // If right child is largest overall
+        if (right < a && array[right] > array[largest]){
+            largest = right;
+        }
+        /* This is in the event that the largest is not the root.
+         * A simple swap algorithm is implemented then heapify is called.
+         */
+        if (largest != b){
+            int temp = array[b];
+            array[b] = array[largest];
+            array[largest] = temp;
+            heapify(array, a, largest);
+        }
+    }
 }
